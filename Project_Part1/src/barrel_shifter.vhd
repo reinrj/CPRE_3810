@@ -1,0 +1,55 @@
+-------------------------------------------------------------------------
+-- Rose Reinhart
+-- Department of Electrical and Computer Engineering
+-- Iowa State University
+-------------------------------------------------------------------------
+
+
+-- barrel_shifter.vhd
+-------------------------------------------------------------------------
+-- DESCRIPTION: 
+-- 
+--
+-- NOTES:
+-- 
+-------------------------------------------------------------------------
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity barrel_shifter is
+    port(
+	 
+	 
+	);
+end barrel_shifter;
+
+
+architecture structural of barrel_shifter is
+
+
+
+
+
+
+
+
+
+
+
+begin
+
+
+
+
+
+
+
+
+
+
+
+
+
+end structural; 
