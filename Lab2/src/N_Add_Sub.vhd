@@ -1,0 +1,82 @@
+-------------------------------------------------------------------------
+-- Rose Reinhart
+-- Department of Electrical and Computer Engineering
+-- Iowa State University
+-------------------------------------------------------------------------
+
+
+-- N_bit_adder.vhd
+-------------------------------------------------------------------------
+-- DESCRIPTION: 
+--
+--
+-- NOTES:
+-- 
+-------------------------------------------------------------------------
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+
+entity N_Add_Sub is
+	port(
+	i_A : in std_logic_vector(31 downto 0) := (others => '0');
+	i_B : in std_logic_vector(31 downto 0) := (others => '0');
+	i_Sub : in std_logic := '0';
+	o_O  : out std_logic_vector(31 downto 0);
+	o_C  : out std_logic := '0');
+end N_Add_Sub;
+
+
+architecture structural of N_Add_Sub is
+
+constant N : integer := 32;
+
+
+component N_bit_adder is
+  port(
+	i_A1 : in std_logic_vector(31 downto 0);
+	i_B1 : in std_logic_vector(31 downto 0);
+	i_C1 : in std_logic;
+	o_O  : out std_logic_vector(31 downto 0);
+	o_C  : out std_logic);
+end component;
+
+component onescomp is
+	port(	i_A          : in std_logic_vector(31 downto 0);
+       		o_F          : out std_logic_vector(31 downto 0));
+end component;
+
+component mux2t1_N is
+  port(i_S          : in std_logic;
+       i_D0         : in std_logic_vector(31 downto 0);
+       i_D1         : in std_logic_vector(31 downto 0);
+       o_O         : out std_logic_vector(31 downto 0));
+end component;
+
+
+signal s_S, s_Bi, s_A : std_logic_vector(31 downto 0) := (others => '0');
+--signal i_C1 : std_logic;
+
+begin
+
+    x1: onescomp port map (
+			i_A => i_B,
+			o_F  => s_Bi);
+
+    x2: mux2t1_N port map (
+			i_S  => i_Sub,
+			i_D0 => i_B,
+			i_D1 => s_Bi,
+			o_O => s_S);
+
+    x3: N_bit_adder port map (
+			i_A1 => i_A,
+			i_B1 => s_S,
+			i_C1 => i_Sub,
+			o_O => o_O,
+			o_C => o_C);
+
+    
+  
+end structural;
