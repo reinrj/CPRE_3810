@@ -1,0 +1,108 @@
+-------------------------------------------------------------------------
+-- Rose Reinhart
+-- Department of Electrical and Computer Engineering
+-- Iowa State University
+-------------------------------------------------------------------------
+
+
+-- controlLogic.vhd
+-------------------------------------------------------------------------
+-- DESCRIPTION: 
+-- 
+--
+-- NOTES:
+-- 
+-------------------------------------------------------------------------
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+
+entity controlLogic is
+   port(
+	opcode	: in std_logic_vector(6 downto 0);
+	func3	: in std_logic_vector(2 downto 0);
+	func7	: in std_logic_vector(6 downto 0);
+	ALUSrc	: out std_logic;
+	ALUCtl	: out std_logic;
+	ImmType	: out std_logic_vector(2 downto 0);
+	ResultSrc : out std_logic;
+	MemWrite  : out std_logic;
+	RegWrite  : out std_logic;
+	Branch	  : out std_logic;
+	MemtoReg  : out std_logic;
+	--ALUOp	: out std_logic_vector(3 downto 0);
+	Jump	: out std_logic;
+	AndLink : out std_logic
+	);
+end controlLogic;
+
+
+architecture dataflow of controlLogic is
+
+
+signal instruction : std_logic_vector(16 downto 0);	-- used to indicate which instruction it is
+
+
+
+
+
+
+begin 
+
+
+	-- put all of the codes together
+instruction <= std_logic_vector(resize(shift_left(unsigned(opcode), 10) + shift_left(unsigned(func3), 7) + unsigned(func7), 17));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--
+--  process
+--  begin
+--
+--if (opcode = "0010011" AND func3 = "000") then 	-- addi
+--	ALUSrc	<= '1';
+--	ALUCtl	<= '0';
+--	ImmType	<= "000";	
+--	MemWrite <= '0';
+--	RegWrite <= '1';
+--	Branch	 <= '0';
+--	Memtoreg <= '0';
+--	Jump	 <= '0';
+--	AndLink  <= '0';
+--elsif (opcode = "0110011" AND func3 = "000" AND func7 = "0000000") then 	-- add
+--	ALUSrc	<= '0';
+--	ALUCtl	<= '0';
+--	ImmType	<= "000";	-- irrelevant
+--	MemWrite <= '0';
+--	RegWrite <= '1';
+--	Branch	 <= '0';
+--	Memtoreg <= '0';
+--	Jump	 <= '0';
+--	AndLink  <= '0';
+--end if;
+--	
+--
+--
+--
+--
+--
+--
+--end process;
+
+end dataflow;
